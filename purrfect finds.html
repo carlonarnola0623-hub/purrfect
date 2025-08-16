@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Purrfect Finds — STEM 12-A</title>
+  <style>
+    :root{
+      --pink:#ff69b4;
+      --pink-2:#ff8fb1;
+      --text:#4b2e2e;
+      --bg-card:rgba(255,192,203,0.95); /* light pink for products */
+      --bg-modal:#fff;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:'Comic Sans MS', cursive, sans-serif;
+      color:var(--text);
+      background: linear-gradient(rgba(255,182,193,0.3), rgba(255,182,193,0.3)), url('https://cdn.pixabay.com/photo/2017/03/29/12/20/cat-2189693_1280.jpg') no-repeat center/cover fixed;
+      line-height:1.4;
+    }
+
+    header{
+      background:var(--pink);
+      padding:10px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      position:sticky;top:0;z-index:50;
+      box-shadow:0 2px 8px rgba(0,0,0,.15);
+    }
+    .brand{display:flex;align-items:center;gap:10px}
+    .brand img{width:56px;height:56px;border-radius:50%;box-shadow:0 0 6px rgba(0,0,0,.25)}
+    .brand h1{font-size:22px;margin:0;color:#fff}
+    nav a{
+      color:#fff;background:var(--pink-2);
+      padding:8px 12px;border-radius:999px;
+      margin-left:8px;text-decoration:none;font-weight:bold;
+      display:inline-block
+    }
+    nav a:hover{opacity:.9}
+
+    .container{max-width:1000px;margin:24px auto;padding:16px}
+    .card{
+      background:var(--bg-card);border-radius:14px;
+      box-shadow:0 6px 14px rgba(0,0,0,.15);padding:18px;
+      color:#4b2e2e;
+    }
+    .section-title{margin:0 0 14px 0;font-size:24px;text-align:center}
+
+    .grid{display:grid;grid-template-columns:repeat( auto-fit, minmax(260px,1fr) );gap:16px}
+    .product{display:flex;flex-direction:column;gap:10px}
+    .product img{width:100%;height:200px;object-fit:cover;border-radius:12px}
+    .row{display:flex;gap:8px;flex-wrap:wrap}
+    select, input[type="number"], input[type="text"], input[type="tel"], input[type="email"], textarea{
+      width:100%;padding:10px;border:1px solid #ddd;border-radius:8px;font-size:14px
+    }
+    .btn{
+      background:var(--pink);color:#fff;border:none;border-radius:8px;
+      padding:10px 14px;cursor:pointer;font-weight:bold;font-size:14px
+    }
+    .btn.full{width:100%}
+    .btn.secondary{background:#ddd;color:#222}
+    .btn:hover{filter:brightness(.95)}
+    .muted{font-size:12px;opacity:.85}
+    .badge{
+      display:inline-block;background:#ffe4ef;color:#a03b6b;border-radius:8px;padding:2px 8px;font-size:12px;margin-left:6px
+    }
+
+    footer{
+      margin-top:24px;background:var(--pink);color:var(--text);
+      text-align:center;padding:12px;font-size:14px
+    }
+
+    .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:100}
+    .modal.open{display:flex;align-items:center;justify-content:center;padding:16px}
+    .modal .content{
+      background:var(--bg-modal);border-radius:14px;max-width:780px;width:100%;
+      max-height:85vh;overflow:auto;padding:18px;position:relative;color:#222
+    }
+    .close{
+      position:absolute;right:12px;top:8px;font-size:22px;cursor:pointer;border:none;background:transparent
+    }
+
+    .board{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+    .chip{
+      border:2px dashed var(--pink-2);border-radius:12px;padding:12px;background:#fff
+    }
+    .chip h4{margin:0 0 6px 0}
+    .chip ul{margin:0 0 0 18px;padding:0}
+    .chip li{margin:4px 0}
+
+    .summary{background:#fff7fb;border:1px solid #ffd3ea;border-radius:10px;padding:10px;margin:10px 0}
+    .summary b{color:#a03b6b}
+
+    .warn-head{
+      background:#ffe7e7;border:1px solid #ffc7c7;
+      padding:10px;border-radius:10px;margin-bottom:10px;
+      display:flex;gap:10px;align-items:center
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand">
+      <img src="https://i.ibb.co/mrf3W4Wq/4d6f9eaa-bd03-4bbc-9871-e175e3799acb-2.jpg" alt="Purrfect Finds Logo">
+      <div>
+        <h1>Purrfect Finds</h1>
+        <div class="muted">Locally made cat toys & accessories • STEM 12-A</div>
+      </div>
+    </div>
+    <nav>
+      <a href="#products">Products</a>
+      <a href="#" onclick="openModal('howModal');return false;">How It Works</a>
+      <a href="#" onclick="openModal('policiesModal');return false;">Policies</a>
+      <a href="#" onclick="openModal('contactModal');return false;">Contact</a>
+      <a href="#" onclick="openModal('cyberModal');return false;">Cyber Safety</a>
+    </nav>
+  </header>
+
+  <main id="products" class="container card">
+    <h2 class="section-title">Our Products</h2>
+    <div class="grid">
+      <div class="product card">
+        <img src="https://i.ibb.co/vx8F0TH1/Rhode-Island-Novelty-6-Inch-Wind-Up-Mouse-Toy-Set-of-4-Assorted.jpg" alt="Fluffy Mouse Toy">
+        <h3>Fluffy Mouse Toy <span class="badge">₱99</span></h3>
+        <p class="muted">Handcrafted with love for playful paws.</p>
+        <div class="row">
+          <select id="color-mouse" aria-label="Mouse Color">
+            <option>Black</option><option>Brown</option><option>Gray</option><option>Green</option>
+          </select>
+          <input id="qty-mouse" type="number" min="1" value="1" aria-label="Quantity">
+        </div>
+        <button class="btn full" onclick="order('Fluffy Mouse Toy')">Buy Now</button>
+      </div>
+
+      <div class="product card">
+        <img src="https://i.ibb.co/Y4P4Mfj5/Cat-Collar-Cookie-Kitten-Collar-Chocolate-Chip-Dog-Collar-Hersey-Cat-Collar-Breakaway-Food-Collar-fo.jpg" alt="Colorful Cat Collar">
+        <h3>Colorful Cat Collar <span class="badge">₱129</span></h3>
+        <p class="muted">Adjustable, comfy, and comes with a cute bell.</p>
+        <div class="row">
+          <select id="color-collar" aria-label="Collar Color">
+            <option>Red</option><option>Blue</option><option>Pink</option><option>Yellow</option>
+          </select>
+          <select id="size-collar" aria-label="Collar Size">
+            <option>Small (18–23 cm)</option>
+            <option>Medium (23–28 cm)</option>
+            <option>Large (28–33 cm)</option>
+          </select>
+        </div>
+        <div class="muted">Size Guide: Measure your cat’s neck and add 2 cm for comfort.</div>
+        <div class="row" style="margin-top:8px;">
+          <input id="qty-collar" type="number" min="1" value="1" aria-label="Quantity">
+        </div>
+        <button class="btn full" onclick="order('Colorful Cat Collar')">Buy Now</button>
+      </div>
+
+      <div class="product card">
+        <img src="https://i.ibb.co/6KTNVt0/Dog-and-Cat-Sweater-with-Turtleneck.jpg" alt="Cozy Cat Sweater">
+        <h3>Cozy Cat Sweater <span class="badge">₱299</span></h3>
+        <p class="muted">Keep your kitty warm and stylish.</p>
+        <div class="row">
+          <select id="color-sweater" aria-label="Sweater Color">
+            <option>Orange</option><option>Pink</option><option>White</option><option>Black</option>
+          </select>
+          <select id="size-sweater" aria-label="Sweater Size">
+            <option>Small</option><option>Medium</option><option>Large</option>
+          </select>
+        </div>
+        <div class="row" style="margin-top:8px;">
+          <input id="qty-sweater" type="number" min="1" value="1" aria-label="Quantity">
+        </div>
+        <button class="btn full" onclick="order('Cozy Cat Sweater')">Buy Now</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 Purrfect Finds | STEM 12-A Cat Toys and Accessories Seller | All Rights Reserved
+  </footer>
+
+  <!-- Business Policies Modal -->
+  <div id="policiesModal" class="modal">
+    <div class="content">
+      <button class="close" onclick="closeModal('policiesModal')">✕</button>
+      <h2>Business Introduction & Policies</h2>
+
+      <h3>BUSINESS INTRODUCTION</h3>
+      <p>Welcome to Purrfect Finds - the cat's meow of online shops! We sell locally made toys, collars, beds, and other goodies that make your feline feel like royalty. Every item is crafted with love, so your cat can pounce, nap, and purr in pure happiness.</p>
+
+      <h3>PAYMENT POLICY</h3>
+      <p>All payments must be made before we start packing your purr-chase. We accept GCash, bank transfer, and cash on delivery for select areas. Any transaction fees from your chosen method are your responsibility.</p>
+
+      <h3>SHIPPING POLICY</h3>
+      <p>We pack each order with care and ship within 1–2 business days after payment is confirmed. Shipping usually takes 3–5 business days depending on location.</p>
+
+      <h3>CORRECTNESS OF INFORMATION</h3>
+      <p>Please double-check your details before hitting “Order Meow.” If your address is wrong, your order might wander off like a curious kitten. Let us know of any changes within 12 hours.</p>
+
+      <h3>DISCLAIMER AND ACCEPTANCE</h3>
+      <p>By shopping at Purrfect Finds, you agree to our purr-licies. We can't control courier delays or weather. Continuing means you paws-itively accept these terms.</p>
+
+      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px;">
+        <button class="btn" onclick="closeModal('policiesModal')">Continue to Shop</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Warning Modal -->
+  <div id="warningModal" class="modal">
+    <div class="content">
+      <button class="close" onclick="closeModal('warningModal')">✕</button>
+      <div class="warn-head">
+        <span aria-hidden="true">⚠️</span>
+        <div>
+          <h2 style="margin:0;">WARNING: Illegitimate Ordering Interface</h2>
+          <div class="muted">This is for educational purposes only.</div>
+        </div>
+      </div>
+      <p>Do <strong>not</strong> enter real personal or payment information on unverified pages. This popup replaces the checkout to teach users how to spot potential scams.</p>
+      <h3 style="margin-top:10px;">Quick Tips</h3>
+      <ul>
+        <li>Verify the seller’s identity and contact details.</li>
+        <li>Use secure payment channels only (GCash/Bank/COD).</li>
+        <li>Check reviews and page history.</li>
+        <li>Never share OTPs, passwords, or card details.</li>
+        <li>If a deal seems too good to be true, it probably is.</li>
+      </ul>
+      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px;">
+        <button class="btn" onclick="closeModal('warningModal')">Go Back to Shop</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Modal -->
+  <div id="contactModal" class="modal">
+    <div class="content">
+      <button class="close" onclick="closeModal('contactModal')">✕</button>
+      <h2>Contact Us</h2>
+      <p>We’d love to hear from you! Fill out the form below:</p>
+      <form onsubmit="alert('Thank you! This is a demo form.'); return false;">
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Email" required>
+        <textarea placeholder="Message" rows="4" required></textarea>
+        <button type="submit" class="btn full" style="margin-top:10px;">Send Message</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Cyber Safety Modal -->
+  <div id="cyberModal" class="modal">
+    <div class="content">
+      <button class="close" onclick="closeModal('cyberModal')">✕</button>
+      <h2>Cyber Safety Tips</h2>
+      <p>Online shopping can be fun, but always stay safe. Here are some tips:</p>
+      <ul>
+        <li>Only shop on trusted sites.</li>
+        <li>Check reviews and ratings before buying.</li>
+        <li>Never share personal or payment info on unknown sites.</li>
+        <li>Use secure payment options (GCash, bank transfer, COD).</li>
+        <li>Beware of deals that seem too good to be true.</li>
+      </ul>
+      <div style="display:flex;justify-content:flex-end;margin-top:12px;">
+        <button class="btn" onclick="closeModal('cyberModal')">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openModal(id){ document.getElementById(id).classList.add('open'); }
+    function closeModal(id){ document.getElementById(id).classList.remove('open'); }
+    window.onclick = function(e){
+      document.querySelectorAll('.modal.open').forEach(m=>{
+        if(e.target===m) m.classList.remove('open');
+      });
+    }
+    window.addEventListener('load', ()=>{
+      openModal('policiesModal');
+    });
+    function order(productName){
+      openModal('warningModal');
+    }
+  </script>
+</body>
+</html>
